@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "1bce5d4d-87b1-4de1-bedf-a8eb01217736",
+		"name": "Currency",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/api/currency/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"currency\": \"USD\",\n    \"buy\": 79.56,\n    \"sell\": 80.12,\n    \"begins_at\": \"10.02.2020 15:20:30\",\n    \"office_id\": \"A10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/currency/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"currency",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/currency/get?office_id=A10&at_date=10.02.2020 15:20:30",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/currency/get?office_id=A10&at_date=10.02.2020 15:20:30",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"currency",
+						"get"
+					],
+					"query": [
+						{
+							"key": "office_id",
+							"value": "A10"
+						},
+						{
+							"key": "at_date",
+							"value": "10.02.2020 15:20:30"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

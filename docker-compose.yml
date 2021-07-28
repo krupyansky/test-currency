@@ -1,0 +1,56 @@
+﻿version: "3.7"
+services:
+    api:
+        build:
+            context: docker
+            dockerfile: development/nginx/Dockerfile
+        ports:
+            - "8080:80"
+        volumes:
+            - ./:/app
+
+    api-php-fpm:
+        build:
+            context: docker
+            dockerfile: development/php-fpm/Dockerfile
+        environment:
+            APP_ENV: dev
+            APP_DEBUG: 1
+            DB_HOST: api-maria
+            DB_USER: cur
+            DB_PASSWORD: test
+            DB_NAME: cur
+            YII_ENV: 1
+        volumes:
+            - ./:/app
+
+    api-php-cli:
+        build:
+            context: docker
+            dockerfile: development/php-cli/Dockerfile
+        environment:
+            APP_ENV: dev
+            APP_DEBUG: 1
+            DB_HOST: api-maria
+            DB_USER: cur
+            DB_PASSWORD: test
+            DB_NAME: cur
+            YII_ENV: 1
+        volumes:
+            - ./:/app
+
+    api-maria:
+        image: mariadb:10.5
+        restart: always
+        environment:
+            MYSQL_DATABASE: cur
+            MYSQL_USER: cur
+            MYSQL_PASSWORD: test
+            MYSQL_ROOT_PASSWORD: test
+        command: [ '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
+        volumes:
+            - api-maria:/var/lib/mysql/data
+        ports:
+            - "33066:3306"
+volumes:
+    api-maria:
